@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: en2h_booking_app
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DATABASE_URL=postgresql://neondb_owner:npg_n8YSJEfQwxr4@ep-aged-thunder-at102e1q-pooler.c-9.us-east-1.aws.neon.tech/en2h?sslmode=require&channel_binding=require
+      - JWT_ACCESS_SECRET=super_secret_access_key_en2h_booking_system_2026
+      - JWT_ACCESS_EXPIRATION=15m
+      - JWT_REFRESH_SECRET=super_secret_refresh_key_en2h_booking_system_2026
+      - JWT_REFRESH_EXPIRATION=7d
+    depends_on:
+      - local-db
+
+  local-db:
+    image: postgres:15-alpine
+    container_name: en2h_booking_local_db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=en2h_local
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
