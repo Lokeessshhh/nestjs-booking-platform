@@ -31,7 +31,7 @@ PORT=3000
 NODE_ENV=development
 
 # Database Connection
-DATABASE_URL=postgresql://neondb_owner:npg_n8YSJEfQwxr4@ep-aged-thunder-at102e1q-pooler.c-9.us-east-1.aws.neon.tech/en2h?sslmode=require&channel_binding=require
+DATABASE_URL=postgresql://username:password@host:port/database?sslmode=require
 
 # JWT Secrets
 JWT_ACCESS_SECRET=super_secret_access_key_en2h_booking_system_2026
